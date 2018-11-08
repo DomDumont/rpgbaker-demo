@@ -23,6 +23,6 @@ export default class RoomMenu extends Room {
   }
 
   Update(delta) {
-    console.log("roomMenu update");
+    // console.log("roomMenu update");
   }
 }
