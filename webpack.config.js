@@ -1,5 +1,7 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+var path = require("path");
+
 module.exports = {
   entry: {
     app: "./src/index.js"
@@ -72,5 +74,10 @@ module.exports = {
       chunkFilename: "[id].css"
     })
   ],
-  target: "web"
+  target: "web",
+  resolve: {
+    alias: {
+      "pixi.js": path.resolve("./node_modules/pixi.js")
+    }
+  }
 };
