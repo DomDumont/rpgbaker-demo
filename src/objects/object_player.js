@@ -21,7 +21,8 @@ export default class ObjectPlayer extends GameObject {
     }
 
     this.femaleBody = new PIXI.Sprite(this.textureArray[this.xFrame]);
-    // this.femaleBody.parentGroup = timejs.group1;
+    this.femaleBody.parentGroup = this.parent.game.groups.get("1");
+
     // this.femaleBody.anchor.set(0.5)
 
     this.addChild(this.femaleBody);
@@ -36,7 +37,8 @@ export default class ObjectPlayer extends GameObject {
     graphics.lineStyle(1, 0xffff00);
     // draw a rectangle
     graphics.drawRect(toto.x, toto.y, toto.width, toto.height);
-    // graphics.parentGroup = timejs.group1;
+    graphics.parentGroup = this.parent.game.groups.get("1");
+
     this.addChild(graphics);
 
     // this.graphics = new PIXI.Graphics()
