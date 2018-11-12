@@ -3,14 +3,18 @@ import { GameObject, Utils } from 'rpgbaker'
 
 const PIXI = require('pixi.js')
 const femaleBody = require('../assets/female-body.png')
+const femaleDress = require('../assets/tightdress_red.png')
+const femaleHair = require('../assets/blonde2.png')
 
 export default class ObjectPlayer extends GameObject {
   Init () {
-    this.animSpeed = 6
+    this.animSpeed = 15
     this.animLength = 9
     this.xFrame = 1
     this.yFrame = 11
     this.textureBody = PIXI.loader.resources[femaleBody].texture
+    this.textureDress = PIXI.loader.resources[femaleDress].texture
+    this.textureHair = PIXI.loader.resources[femaleHair].texture
 
     this.femaleBody = new PIXI.Sprite(
       Utils.GetTexturePart(
@@ -22,10 +26,31 @@ export default class ObjectPlayer extends GameObject {
       )
     )
     this.femaleBody.parentGroup = this.parent.game.groups.get('1')
-
-    // this.femaleBody.anchor.set(0.5)
-
     this.addChild(this.femaleBody)
+
+    this.femaleDress = new PIXI.Sprite(
+      Utils.GetTexturePart(
+        this.textureDress,
+        this.xFrame * 64,
+        this.yFrame * 64,
+        64,
+        64
+      )
+    )
+    this.femaleDress.parentGroup = this.parent.game.groups.get('1')
+    this.addChild(this.femaleDress)
+
+    this.femaleHair = new PIXI.Sprite(
+      Utils.GetTexturePart(
+        this.textureHair,
+        this.xFrame * 64,
+        this.yFrame * 64,
+        64,
+        64
+      )
+    )
+    this.femaleHair.parentGroup = this.parent.game.groups.get('1')
+    this.addChild(this.femaleHair)
 
     let tempHitArea = new PIXI.Rectangle(17, 54, 30, 10)
     this.hitArea = tempHitArea
@@ -50,7 +75,7 @@ export default class ObjectPlayer extends GameObject {
 
     this.moveX = 0
     this.moveY = 0
-    this.speed = 4
+    this.speed = 2
   }
 
   Update (delta) {
@@ -128,6 +153,22 @@ export default class ObjectPlayer extends GameObject {
 
     this.femaleBody.texture = Utils.GetTexturePart(
       this.textureBody,
+      Math.floor(this.xFrame) * 64,
+      this.yFrame * 64,
+      64,
+      64
+    )
+
+    this.femaleDress.texture = Utils.GetTexturePart(
+      this.textureDress,
+      Math.floor(this.xFrame) * 64,
+      this.yFrame * 64,
+      64,
+      64
+    )
+
+    this.femaleHair.texture = Utils.GetTexturePart(
+      this.textureHair,
       Math.floor(this.xFrame) * 64,
       this.yFrame * 64,
       64,
