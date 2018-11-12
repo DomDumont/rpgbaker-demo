@@ -33,6 +33,11 @@ export default class RoomGame extends Room {
     }
     super.Update(delta)
   }
+
+  Destroy () {
+    super.Destroy()
+    this.game.camera.Follow(undefined)
+  }
 }
 
 // const { Howl, Howler } = require('howler')
