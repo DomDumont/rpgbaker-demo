@@ -1,45 +1,45 @@
-import ObjectCollisions from "./object_collisions";
-import { GameObject } from "rpgbaker";
+import ObjectCollisions from './object_collisions'
+import { GameObject, Utils } from 'rpgbaker'
 
-const PIXI = require("pixi.js");
-const femaleBody = require("../assets/female-body.png");
+const PIXI = require('pixi.js')
+const femaleBody = require('../assets/female-body.png')
 
 export default class ObjectPlayer extends GameObject {
-  Init() {
-    this.animSpeed = 4;
-    this.animLength = 9;
-    this.xFrame = 1;
-    let texture = PIXI.loader.resources[femaleBody].texture;
-    this.textureArray = [];
+  Init () {
+    this.animSpeed = 6
+    this.animLength = 9
+    this.xFrame = 1
+    this.yFrame = 11
+    this.textureBody = PIXI.loader.resources[femaleBody].texture
 
-    for (let i = 0; i < this.animLength; i++) {
-      let tempTexture = new PIXI.Texture(
-        texture,
-        new PIXI.Rectangle(i * 64, 11 * 64, 64, 64)
-      );
-      this.textureArray.push(tempTexture);
-    }
-
-    this.femaleBody = new PIXI.Sprite(this.textureArray[this.xFrame]);
-    this.femaleBody.parentGroup = this.parent.game.groups.get("1");
+    this.femaleBody = new PIXI.Sprite(
+      Utils.GetTexturePart(
+        this.textureBody,
+        this.xFrame * 64,
+        this.yFrame * 64,
+        64,
+        64
+      )
+    )
+    this.femaleBody.parentGroup = this.parent.game.groups.get('1')
 
     // this.femaleBody.anchor.set(0.5)
 
-    this.addChild(this.femaleBody);
+    this.addChild(this.femaleBody)
 
-    let tempHitArea = new PIXI.Rectangle(17, 54, 30, 10);
-    this.hitArea = tempHitArea;
+    let tempHitArea = new PIXI.Rectangle(17, 54, 30, 10)
+    this.hitArea = tempHitArea
 
-    let toto = this.hitArea;
-    var graphics = new PIXI.Graphics();
+    let toto = this.hitArea
+    var graphics = new PIXI.Graphics()
     // graphics.beginFill(0xffff00)
     // set the line style to have a width of 5 and set the color to red
-    graphics.lineStyle(1, 0xffff00);
+    graphics.lineStyle(1, 0xffff00)
     // draw a rectangle
-    graphics.drawRect(toto.x, toto.y, toto.width, toto.height);
-    graphics.parentGroup = this.parent.game.groups.get("1");
+    graphics.drawRect(toto.x, toto.y, toto.width, toto.height)
+    graphics.parentGroup = this.parent.game.groups.get('1')
 
-    this.addChild(graphics);
+    this.addChild(graphics)
 
     // this.graphics = new PIXI.Graphics()
     // this.graphics.beginFill(0xff7070, 1)
@@ -48,34 +48,34 @@ export default class ObjectPlayer extends GameObject {
 
     // this.addChild(this.graphics)
 
-    this.moveX = 0;
-    this.moveY = 0;
-    this.speed = 4;
+    this.moveX = 0
+    this.moveY = 0
+    this.speed = 4
   }
 
-  Update(delta) {
+  Update (delta) {
     // console.log(this.x)
     // console.log(this.y)
 
-    this.moveX = 0;
-    this.moveY = 0;
+    this.moveX = 0
+    this.moveY = 0
 
     if (this.parent.game.input.IsKeyDown(this.parent.game.input.vk_left)) {
-      this.moveX -= this.speed;
+      this.moveX -= this.speed
     }
     if (this.parent.game.input.IsKeyDown(this.parent.game.input.vk_right)) {
-      this.moveX += this.speed;
+      this.moveX += this.speed
     }
     if (this.parent.game.input.IsKeyDown(this.parent.game.input.vk_down)) {
-      this.moveY += this.speed;
+      this.moveY += this.speed
     }
     if (this.parent.game.input.IsKeyDown(this.parent.game.input.vk_up)) {
-      this.moveY -= this.speed;
+      this.moveY -= this.speed
     }
 
     if (this.moveX) {
       if (this.PlaceMeeting(this.x + this.moveX, this.y, ObjectCollisions)) {
-        console.log("!!!! YESSSS");
+        console.log('!!!! YESSSS')
         for (let i = 0; i < Math.abs(this.moveX); i++) {
           if (
             this.PlaceMeeting(
@@ -84,10 +84,10 @@ export default class ObjectPlayer extends GameObject {
               ObjectCollisions
             ) === false
           ) {
-            this.x += Math.sign(this.moveX);
+            this.x += Math.sign(this.moveX)
           }
         }
-        this.moveX = 0;
+        this.moveX = 0
       }
     }
 
@@ -101,26 +101,37 @@ export default class ObjectPlayer extends GameObject {
               ObjectCollisions
             ) === false
           ) {
-            this.y += Math.sign(this.moveY);
+            this.y += Math.sign(this.moveY)
           }
         }
-        this.moveY = 0;
+        this.moveY = 0
       }
     }
 
     // Apply movement
-    this.x += this.moveX;
-    this.y += this.moveY;
+    this.x += this.moveX
+    this.y += this.moveY
 
     // Update texture animation
 
     if (this.xFrame < this.animLength - this.animSpeed / 60) {
-      this.xFrame = this.xFrame + this.animSpeed / 60;
+      this.xFrame = this.xFrame + this.animSpeed / 60
     } else {
-      this.xFrame = 1;
+      this.xFrame = 1
     }
 
-    // console.log(Math.floor(this.xFrame))
-    this.femaleBody.texture = this.textureArray[Math.floor(this.xFrame)];
+    if (this.moveX < 0) this.yFrame = 9
+    else if (this.moveX > 0) this.yFrame = 11
+    else if (this.moveY < 0) this.yFrame = 8
+    else if (this.moveY > 0) this.yFrame = 10
+    else this.xFrame = 0
+
+    this.femaleBody.texture = Utils.GetTexturePart(
+      this.textureBody,
+      Math.floor(this.xFrame) * 64,
+      this.yFrame * 64,
+      64,
+      64
+    )
   }
 }
