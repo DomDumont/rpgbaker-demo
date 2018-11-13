@@ -25,7 +25,7 @@ export default class ObjectPlayer extends GameObject {
         64
       )
     )
-    this.femaleBody.parentGroup = this.parent.game.groups.get('1')
+    // this.femaleBody.parentGroup = this.parent.game.groups.get('1')
     this.addChild(this.femaleBody)
 
     this.femaleDress = new PIXI.Sprite(
@@ -37,7 +37,7 @@ export default class ObjectPlayer extends GameObject {
         64
       )
     )
-    this.femaleDress.parentGroup = this.parent.game.groups.get('1')
+    // this.femaleDress.parentGroup = this.parent.game.groups.get('1')
     this.addChild(this.femaleDress)
 
     this.femaleHair = new PIXI.Sprite(
@@ -49,7 +49,7 @@ export default class ObjectPlayer extends GameObject {
         64
       )
     )
-    this.femaleHair.parentGroup = this.parent.game.groups.get('1')
+    // this.femaleHair.parentGroup = this.parent.game.groups.get('1')
     this.addChild(this.femaleHair)
 
     let tempHitArea = new PIXI.Rectangle(17, 54, 30, 10)
@@ -62,7 +62,7 @@ export default class ObjectPlayer extends GameObject {
     graphics.lineStyle(1, 0xffff00)
     // draw a rectangle
     graphics.drawRect(toto.x, toto.y, toto.width, toto.height)
-    graphics.parentGroup = this.parent.game.groups.get('1')
+    // graphics.parentGroup = this.parent.game.groups.get('1')
 
     this.addChild(graphics)
 
@@ -85,16 +85,16 @@ export default class ObjectPlayer extends GameObject {
     this.moveX = 0
     this.moveY = 0
 
-    if (this.parent.game.input.IsKeyDown(this.parent.game.input.vk_left)) {
+    if (this.myParent.game.input.IsKeyDown(this.myParent.game.input.vk_left)) {
       this.moveX -= this.speed
     }
-    if (this.parent.game.input.IsKeyDown(this.parent.game.input.vk_right)) {
+    if (this.myParent.game.input.IsKeyDown(this.myParent.game.input.vk_right)) {
       this.moveX += this.speed
     }
-    if (this.parent.game.input.IsKeyDown(this.parent.game.input.vk_down)) {
+    if (this.myParent.game.input.IsKeyDown(this.myParent.game.input.vk_down)) {
       this.moveY += this.speed
     }
-    if (this.parent.game.input.IsKeyDown(this.parent.game.input.vk_up)) {
+    if (this.myParent.game.input.IsKeyDown(this.myParent.game.input.vk_up)) {
       this.moveY -= this.speed
     }
 
