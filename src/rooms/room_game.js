@@ -3,7 +3,6 @@ import ObjectPlayer from '../objects/object_player'
 import { Room, TileMap } from 'rpgbaker'
 
 const map01 = require('../assets/map01.json')
-const texture01 = require('../assets/spr_tile_terrain.png')
 
 export default class RoomGame extends Room {
   Init () {
@@ -20,7 +19,7 @@ export default class RoomGame extends Room {
           break
       }
     })
-    tileMap.Init(texture01)
+    tileMap.Init()
     this.addChild(tileMap)
     super.Init()
   }

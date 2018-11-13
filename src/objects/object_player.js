@@ -75,7 +75,7 @@ export default class ObjectPlayer extends GameObject {
 
     this.moveX = 0
     this.moveY = 0
-    this.speed = 2
+    this.speed = 4
   }
 
   Update (delta) {
