@@ -84,28 +84,43 @@ export default class ObjectNPC extends GameObject {
 
     this.moveX = 0
     this.moveY = 0
-    this.speed = 4
+    this.speed = 1
+
+    this.SetAlarm(1, 1)
   }
 
-  Update (delta) {
-    // console.log(this.x)
-    // console.log(this.y)
-
+  OnAlarm (alarmIndex) {
     this.moveX = 0
     this.moveY = 0
 
-    if (this.myParent.game.input.IsKeyDown(this.myParent.game.input.vk_left)) {
-      this.moveX -= this.speed
+    console.log('real OnAlarm ' + alarmIndex)
+    this.SetAlarm(1, Utils.GetRandomFloat(2.5, 4) * 60) // TODO change the 60 to ticker.FPS
+
+    let idle = Utils.GetRandomBool()
+    if (idle === false) {
+      console.log('idle is false')
+      let dir = Utils.GetRandomInt(1, 4)
+      console.log('dir = ' + dir)
+      switch (dir) {
+        case 1:
+          this.moveX = -this.speed
+          break
+        case 2:
+          this.moveX = this.speed
+          break
+        case 3:
+          this.moveY = -this.speed
+          break
+        case 4:
+          this.moveY = this.speed
+          break
+      }
     }
-    if (this.myParent.game.input.IsKeyDown(this.myParent.game.input.vk_right)) {
-      this.moveX += this.speed
-    }
-    if (this.myParent.game.input.IsKeyDown(this.myParent.game.input.vk_down)) {
-      this.moveY += this.speed
-    }
-    if (this.myParent.game.input.IsKeyDown(this.myParent.game.input.vk_up)) {
-      this.moveY -= this.speed
-    }
+  }
+  Update (delta) {
+    super.Update()
+    // console.log(this.x)
+    // console.log(this.y)
 
     if (this.moveX) {
       if (this.PlaceMeeting(this.x + this.moveX, this.y, ObjectCollisions)) {
