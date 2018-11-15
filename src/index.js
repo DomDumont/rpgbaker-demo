@@ -12,12 +12,19 @@ const tileTerrain = require('./assets/spr_tile_terrain.png')
 const tileCottage = require('./assets/spr_tile_cottage.png')
 const shadow = require('./assets/shadow.png')
 
+const maleBody = require('./assets/male-body.png')
+const maleDress = require('./assets/teal_longsleeve.png')
+const maleHair = require('./assets/mohawk.png')
+
 PIXI.loader.add(femaleBody)
 PIXI.loader.add(femaleDress)
 PIXI.loader.add(femaleHair)
 PIXI.loader.add(tileTerrain)
 PIXI.loader.add(tileCottage)
 PIXI.loader.add(shadow)
+PIXI.loader.add(maleBody)
+PIXI.loader.add(maleDress)
+PIXI.loader.add(maleHair)
 
 let myGame = new Game(800, 600)
 

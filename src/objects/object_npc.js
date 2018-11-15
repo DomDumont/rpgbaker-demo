@@ -2,9 +2,9 @@ import ObjectCollisions from './object_collisions'
 import { GameObject, Utils } from 'rpgbaker'
 
 const PIXI = require('pixi.js')
-const femaleBody = require('../assets/female-body.png')
-const femaleDress = require('../assets/tightdress_red.png')
-const femaleHair = require('../assets/blonde2.png')
+const maleBody = require('../assets/male-body.png')
+const maleDress = require('../assets/teal_longsleeve.png')
+const maleHair = require('../assets/mohawk.png')
 const shadow = require('../assets/shadow.png')
 
 export default class ObjectNPC extends GameObject {
@@ -13,9 +13,9 @@ export default class ObjectNPC extends GameObject {
     this.animLength = 9
     this.xFrame = 1
     this.yFrame = 11
-    this.textureBody = PIXI.loader.resources[femaleBody].texture
-    this.textureDress = PIXI.loader.resources[femaleDress].texture
-    this.textureHair = PIXI.loader.resources[femaleHair].texture
+    this.textureBody = PIXI.loader.resources[maleBody].texture
+    this.textureDress = PIXI.loader.resources[maleDress].texture
+    this.textureHair = PIXI.loader.resources[maleHair].texture
     this.textureShadow = PIXI.loader.resources[shadow].texture
 
     this.shadow = new PIXI.Sprite(this.textureShadow)
