@@ -1,5 +1,5 @@
 import ObjectCollisions from './object_collisions'
-import { GameObject, Utils } from 'rpgbaker'
+import { Utils } from 'rpgbaker'
 
 const PIXI = require('pixi.js')
 const femaleBody = require('../assets/female-body.png')
@@ -7,7 +7,7 @@ const femaleDress = require('../assets/tightdress_red.png')
 const femaleHair = require('../assets/blonde2.png')
 const shadow = require('../assets/shadow.png')
 
-export default class ObjectPlayer extends GameObject {
+export default class ObjectPlayer extends ObjectCollisions {
   Init () {
     this.animSpeed = 15
     this.animLength = 9
@@ -73,7 +73,7 @@ export default class ObjectPlayer extends GameObject {
     )
     // graphics.parentGroup = this.parent.game.groups.get('1')
 
-    // this.addChild(graphicsHitArea)
+    this.addChild(graphicsHitArea)
 
     // this.graphics = new PIXI.Graphics()
     // this.graphics.beginFill(0xff7070, 1)
