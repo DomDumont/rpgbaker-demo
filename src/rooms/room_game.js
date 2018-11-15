@@ -1,5 +1,6 @@
 import ObjectCollisions from '../objects/object_collisions'
 import ObjectPlayer from '../objects/object_player'
+import ObjectNPC from '../objects/object_npc'
 import { Room, TileMap } from 'rpgbaker'
 
 const map01 = require('../assets/map01.json')
@@ -16,6 +17,11 @@ export default class RoomGame extends Room {
           let tempPlayer = new ObjectPlayer(this, obj)
           this.AddGAO(tilelayer, tempPlayer)
           this.game.camera.Follow(tempPlayer)
+          break
+        case 'NPC':
+          let tempNPC = new ObjectNPC(this, obj)
+          this.AddGAO(tilelayer, tempNPC)
+
           break
       }
     })
