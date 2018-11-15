@@ -1,4 +1,4 @@
-import { Game, Input } from 'rpgbaker'
+import { Game } from 'rpgbaker'
 import RoomMenu from './rooms/room_menu'
 import RoomGame from './rooms/room_game'
 import RoomPause from './rooms/room_pause'
@@ -10,12 +10,14 @@ const femaleHair = require('./assets/blonde2.png')
 
 const tileTerrain = require('./assets/spr_tile_terrain.png')
 const tileCottage = require('./assets/spr_tile_cottage.png')
+const shadow = require('./assets/shadow.png')
 
 PIXI.loader.add(femaleBody)
 PIXI.loader.add(femaleDress)
 PIXI.loader.add(femaleHair)
 PIXI.loader.add(tileTerrain)
 PIXI.loader.add(tileCottage)
+PIXI.loader.add(shadow)
 
 let myGame = new Game(800, 600)
 

@@ -5,6 +5,7 @@ const PIXI = require('pixi.js')
 const femaleBody = require('../assets/female-body.png')
 const femaleDress = require('../assets/tightdress_red.png')
 const femaleHair = require('../assets/blonde2.png')
+const shadow = require('../assets/shadow.png')
 
 export default class ObjectPlayer extends GameObject {
   Init () {
@@ -15,6 +16,10 @@ export default class ObjectPlayer extends GameObject {
     this.textureBody = PIXI.loader.resources[femaleBody].texture
     this.textureDress = PIXI.loader.resources[femaleDress].texture
     this.textureHair = PIXI.loader.resources[femaleHair].texture
+    this.textureShadow = PIXI.loader.resources[shadow].texture
+
+    this.shadow = new PIXI.Sprite(this.textureShadow)
+    this.addChild(this.shadow)
 
     this.femaleBody = new PIXI.Sprite(
       Utils.GetTexturePart(
@@ -55,16 +60,20 @@ export default class ObjectPlayer extends GameObject {
     let tempHitArea = new PIXI.Rectangle(17, 54, 30, 10)
     this.hitArea = tempHitArea
 
-    let toto = this.hitArea
-    var graphics = new PIXI.Graphics()
+    var graphicsHitArea = new PIXI.Graphics()
     // graphics.beginFill(0xffff00)
     // set the line style to have a width of 5 and set the color to red
-    graphics.lineStyle(1, 0xffff00)
+    graphicsHitArea.lineStyle(1, 0xffff00)
     // draw a rectangle
-    graphics.drawRect(toto.x, toto.y, toto.width, toto.height)
+    graphicsHitArea.drawRect(
+      this.hitArea.x,
+      this.hitArea.y,
+      this.hitArea.width,
+      this.hitArea.height
+    )
     // graphics.parentGroup = this.parent.game.groups.get('1')
 
-    this.addChild(graphics)
+    // this.addChild(graphicsHitArea)
 
     // this.graphics = new PIXI.Graphics()
     // this.graphics.beginFill(0xff7070, 1)
