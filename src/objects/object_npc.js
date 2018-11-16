@@ -93,14 +93,14 @@ export default class ObjectNPC extends ObjectCollisions {
     this.moveX = 0
     this.moveY = 0
 
-    console.log('real OnAlarm ' + alarmIndex)
+    // console.log('real OnAlarm ' + alarmIndex)
     this.SetAlarm(1, Utils.GetRandomFloat(2.5, 4) * 60) // TODO change the 60 to ticker.FPS
 
     let idle = Utils.GetRandomBool()
     if (idle === false) {
-      console.log('idle is false')
+      // console.log('idle is false')
       let dir = Utils.GetRandomInt(1, 4)
-      console.log('dir = ' + dir)
+      // console.log('dir = ' + dir)
       switch (dir) {
         case 1:
           this.moveX = -this.speed

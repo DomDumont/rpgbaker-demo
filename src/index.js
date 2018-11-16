@@ -2,6 +2,7 @@ import { Game } from 'rpgbaker'
 import RoomMenu from './rooms/room_menu'
 import RoomGame from './rooms/room_game'
 import RoomPause from './rooms/room_pause'
+import RoomMain from './rooms/room_main'
 const PIXI = require('pixi.js')
 
 const femaleBody = require('./assets/female-body.png')
@@ -28,8 +29,9 @@ PIXI.loader.add(maleHair)
 
 let myGame = new Game(800, 600)
 
+myGame.AddRoom('MainRoom', new RoomMain())
 myGame.AddRoom('MenuRoom', new RoomMenu())
 myGame.AddRoom('GameRoom', new RoomGame())
 myGame.AddRoom('PauseRoom', new RoomPause())
 myGame.Init()
-myGame.RoomGoto('MenuRoom')
+myGame.RoomGoto('MainRoom')

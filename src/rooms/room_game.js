@@ -8,7 +8,6 @@ const map01 = require('../assets/map01.json')
 export default class RoomGame extends Room {
   Init () {
     let tileMap = new TileMap(map01, (tilelayer, obj) => {
-      console.dir(obj)
       switch (obj.type) {
         case 'COLLISIONS':
           this.AddGAO(tilelayer, new ObjectCollisions(this, obj))
