@@ -9,6 +9,8 @@ const shadow = require('../assets/shadow.png')
 
 export default class ObjectPlayer extends ObjectCollisions {
   Init () {
+    super.Init()
+
     this.animSpeed = 15
     this.animLength = 9
     this.xFrame = 1
@@ -57,30 +59,7 @@ export default class ObjectPlayer extends ObjectCollisions {
     // this.femaleHair.parentGroup = this.parent.game.groups.get('1')
     this.addChild(this.femaleHair)
 
-    let tempHitArea = new PIXI.Rectangle(17, 54, 30, 10)
-    this.hitArea = tempHitArea
-
-    var graphicsHitArea = new PIXI.Graphics()
-    // graphics.beginFill(0xffff00)
-    // set the line style to have a width of 5 and set the color to red
-    graphicsHitArea.lineStyle(1, 0xffff00)
-    // draw a rectangle
-    graphicsHitArea.drawRect(
-      this.hitArea.x,
-      this.hitArea.y,
-      this.hitArea.width,
-      this.hitArea.height
-    )
-    // graphics.parentGroup = this.parent.game.groups.get('1')
-
-    this.addChild(graphicsHitArea)
-
-    // this.graphics = new PIXI.Graphics()
-    // this.graphics.beginFill(0xff7070, 1)
-    // this.graphics.drawRect(0, 0, this.jsonObject.width, this.jsonObject.height)
-    // this.graphics.endFill()
-
-    // this.addChild(this.graphics)
+    this.SetHitArea(new PIXI.Rectangle(17, 54, 30, 10))
 
     this.moveX = 0
     this.moveY = 0
@@ -88,8 +67,7 @@ export default class ObjectPlayer extends ObjectCollisions {
   }
 
   Update (delta) {
-    // console.log(this.x)
-    // console.log(this.y)
+    super.Update(delta)
 
     this.moveX = 0
     this.moveY = 0
