@@ -230,7 +230,7 @@
                         {
                          "name":"TargetRoom",
                          "type":"string",
-                         "value":"map02"
+                         "value":"InteriorRoom"
                         }],
                  "rotation":0,
                  "type":"TRANSITIONS",

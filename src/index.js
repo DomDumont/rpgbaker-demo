@@ -3,6 +3,8 @@ import RoomMenu from './rooms/room_menu'
 import RoomGame from './rooms/room_game'
 import RoomPause from './rooms/room_pause'
 import RoomMain from './rooms/room_main'
+import RoomInterior from './rooms/room_interior'
+
 const PIXI = require('pixi.js')
 
 const femaleBody = require('./assets/female-body.png')
@@ -11,6 +13,8 @@ const femaleHair = require('./assets/blonde2.png')
 
 const tileTerrain = require('./assets/spr_tile_terrain.png')
 const tileCottage = require('./assets/spr_tile_cottage.png')
+const tileInterior = require('./assets/spr_tile_interior.png')
+
 const shadow = require('./assets/shadow.png')
 
 const maleBody = require('./assets/male-body.png')
@@ -22,6 +26,7 @@ PIXI.loader.add(femaleDress)
 PIXI.loader.add(femaleHair)
 PIXI.loader.add(tileTerrain)
 PIXI.loader.add(tileCottage)
+PIXI.loader.add(tileInterior)
 PIXI.loader.add(shadow)
 PIXI.loader.add(maleBody)
 PIXI.loader.add(maleDress)
@@ -33,5 +38,6 @@ myGame.AddRoom('MainRoom', new RoomMain())
 myGame.AddRoom('MenuRoom', new RoomMenu())
 myGame.AddRoom('GameRoom', new RoomGame())
 myGame.AddRoom('PauseRoom', new RoomPause())
+myGame.AddRoom('InteriorRoom', new RoomInterior())
 myGame.Init()
 myGame.RoomGoto('MainRoom')

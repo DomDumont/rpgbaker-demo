@@ -1,4 +1,5 @@
 import ObjectCollisions from './object_collisions'
+import ObjectTransitions from './object_transitions'
 import { Utils } from 'rpgbaker'
 
 const PIXI = require('pixi.js')
@@ -120,7 +121,20 @@ export default class ObjectPlayer extends ObjectCollisions {
       }
     }
 
+    // Check transitions
+
+    let inst = this.InstancePlace(
+      this.x,
+      this.y + this.moveY,
+      ObjectTransitions
+    )
+
+    if (inst) {
+      this.myParent.game.RoomGoto(inst.targetRoom)
+    }
+
     // Apply movement
+
     this.x += this.moveX
     this.y += this.moveY
 
