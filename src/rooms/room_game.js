@@ -1,6 +1,7 @@
 import ObjectCollisions from '../objects/object_collisions'
 import ObjectPlayer from '../objects/object_player'
 import ObjectNPC from '../objects/object_npc'
+import ObjectTransitions from '../objects/object_transitions'
 import { Room, TileMap } from 'rpgbaker'
 
 const map01 = require('../assets/map01.json')
@@ -9,6 +10,9 @@ export default class RoomGame extends Room {
   Init () {
     let tileMap = new TileMap(map01, (tilelayer, obj) => {
       switch (obj.type) {
+        case 'TRANSITIONS':
+          this.AddGAO(tilelayer, new ObjectTransitions('transition', this, obj))
+          break
         case 'COLLISIONS':
           this.AddGAO(tilelayer, new ObjectCollisions('collision', this, obj))
           break
