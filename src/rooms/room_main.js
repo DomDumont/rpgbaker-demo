@@ -5,7 +5,7 @@ export default class RoomMain extends Room {
     console.log('RoomMain Init')
 
     let tempGame = new ObjectGame('game', this)
-    this.AddGAO(undefined, tempGame)
+    this.AddGAO(this, tempGame)
 
     this.game.RoomGoto('MenuRoom')
     super.Init()

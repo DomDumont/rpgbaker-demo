@@ -60,7 +60,18 @@
          "color":"#0000ff",
          "draworder":"topdown",
          "name":"Instances",
-         "objects":[],
+         "objects":[
+                {
+                 "height":32,
+                 "id":54,
+                 "name":"",
+                 "rotation":0,
+                 "type":"PLAYER",
+                 "visible":true,
+                 "width":32,
+                 "x":512,
+                 "y":640
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -122,7 +133,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":54,
+ "nextobjectid":55,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"2018.03.21",

@@ -379,6 +379,8 @@
   <object id="54" type="TRANSITIONS" x="608" y="608" width="32" height="32">
    <properties>
     <property name="TargetRoom" value="InteriorRoom"/>
+    <property name="TargetX" type="int" value="2"/>
+    <property name="TargetY" type="int" value="2"/>
    </properties>
   </object>
  </objectgroup>

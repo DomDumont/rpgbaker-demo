@@ -7,6 +7,20 @@ export default class ObjectGame extends GameObject {
     super.Init()
     this.persistent = true
     this.debugMode = false
+
+    this.guiWidth = this.myParent.game.app.renderer.width
+    this.guiHeight = this.myParent.game.app.renderer.height
+    console.log(this.guiWidth)
+    console.log(this.guiHeight)
+
+    this.graphicsHitArea = new PIXI.Graphics()
+    this.graphicsHitArea.beginFill(0xffff00)
+    this.graphicsHitArea.lineStyle(5, 0xffff00)
+
+    this.graphicsHitArea.drawRect(0, 0, this.guiWidth / 2, this.guiHeight / 2)
+
+    this.addChild(this.graphicsHitArea)
+    this.graphicsHitArea.alpha = 0.5
   }
 
   Update (delta) {

@@ -231,6 +231,16 @@
                          "name":"TargetRoom",
                          "type":"string",
                          "value":"InteriorRoom"
+                        }, 
+                        {
+                         "name":"TargetX",
+                         "type":"int",
+                         "value":2
+                        }, 
+                        {
+                         "name":"TargetY",
+                         "type":"int",
+                         "value":2
                         }],
                  "rotation":0,
                  "type":"TRANSITIONS",
