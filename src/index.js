@@ -21,6 +21,8 @@ const maleBody = require('./assets/male-body.png')
 const maleDress = require('./assets/teal_longsleeve.png')
 const maleHair = require('./assets/mohawk.png')
 
+// localStorage.debug = 'OhYes'
+
 PIXI.loader.add(femaleBody)
 PIXI.loader.add(femaleDress)
 PIXI.loader.add(femaleHair)
