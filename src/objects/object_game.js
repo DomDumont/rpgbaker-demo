@@ -4,7 +4,8 @@ const PIXI = require('pixi.js')
 
 export default class ObjectGame extends GameObject {
   Init () {
-    super.Init()
+    console.log('ObjectGame Init')
+
     this.persistent = true
     this.debugMode = false
 
@@ -13,16 +14,22 @@ export default class ObjectGame extends GameObject {
     console.log(this.guiWidth)
     console.log(this.guiHeight)
 
-    this.graphicsHitArea = new PIXI.Graphics()
-    this.graphicsHitArea.beginFill(0xffff00)
-    this.graphicsHitArea.lineStyle(5, 0xffff00)
+    this.fullScreenQuad = new PIXI.Graphics()
+    this.fullScreenQuad.beginFill(0xffff00)
+    this.fullScreenQuad.lineStyle(5, 0xffff00)
 
-    this.graphicsHitArea.drawRect(0, 0, this.guiWidth / 2, this.guiHeight / 2)
+    this.fullScreenQuad.drawRect(0, 0, this.guiWidth, this.guiHeight)
 
-    this.addChild(this.graphicsHitArea)
-    this.graphicsHitArea.alpha = 0.5
+    this.addChild(this.fullScreenQuad)
+    this.fullScreenQuad.alpha = 0.5
+    this.fullScreenQuad.parentGroup = this.myParent.game.groups.get('2')
+    super.Init()
   }
 
+  Destroy () {
+    console.log('ObjectGame Destroy')
+    this.removeChild(this.fullScreenQuad)
+  }
   Update (delta) {
     super.Update(delta)
 
@@ -35,5 +42,8 @@ export default class ObjectGame extends GameObject {
         obj.graphicsHitArea.alpha = newAlpha
       })
     }
+
+    this.fullScreenQuad.x = -this.myParent.game.app.stage.position.x
+    this.fullScreenQuad.y = -this.myParent.game.app.stage.position.y
   }
 }
