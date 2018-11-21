@@ -11,19 +11,25 @@ export default class RoomGame extends Room {
     let tileMap = new TileMap(map01, (tilelayer, obj) => {
       switch (obj.type) {
         case 'TRANSITIONS':
-          this.AddGAO(tilelayer, new ObjectTransitions('transition', this, obj))
+          let newTransition = new ObjectTransitions('transition', this, obj)
+          this.AddGAO(newTransition)
+          tilelayer.addChild(newTransition)
           break
         case 'COLLISIONS':
-          this.AddGAO(tilelayer, new ObjectCollisions('collision', this, obj))
+          let newCollision = new ObjectCollisions('collision', this, obj)
+          this.AddGAO(newCollision)
+          tilelayer.addChild(newCollision)
           break
         case 'PLAYER':
           let tempPlayer = new ObjectPlayer('player', this, obj)
-          this.AddGAO(tilelayer, tempPlayer)
+          this.AddGAO(tempPlayer)
+          tilelayer.addChild(tempPlayer)
           this.game.camera.Follow(tempPlayer)
           break
         case 'NPC':
           let tempNPC = new ObjectNPC('npc', this, obj)
-          this.AddGAO(tilelayer, tempNPC)
+          this.AddGAO(tempNPC)
+          tilelayer.addChild(tempNPC)
 
           break
       }
