@@ -32,7 +32,6 @@ export default class RoomGame extends Room {
           tempNPC.parentGroup = this.game.groups.get('1')
           this.AddGAO(tempNPC)
           this.addChild(tempNPC)
-
           break
       }
     })

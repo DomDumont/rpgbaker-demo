@@ -1,4 +1,5 @@
 import ObjectCollisions from './object_collisions'
+import ObjectGame from './object_game'
 import ObjectTransitions from './object_transitions'
 import { Utils } from 'rpgbaker'
 
@@ -130,7 +131,11 @@ export default class ObjectPlayer extends ObjectCollisions {
     )
 
     if (inst) {
-      this.myParent.game.RoomGoto(inst.targetRoom)
+      this.With(ObjectGame, obj => {
+        console.log(obj.name)
+        obj.spawnRoom = inst.targetRoom
+        obj.doTransition = true
+      })
     }
 
     // Apply movement

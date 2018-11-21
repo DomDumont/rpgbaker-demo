@@ -15,14 +15,17 @@ export default class ObjectGame extends GameObject {
     console.log(this.guiHeight)
 
     this.fullScreenQuad = new PIXI.Graphics()
-    this.fullScreenQuad.beginFill(0xffff00)
-    this.fullScreenQuad.lineStyle(5, 0xffff00)
+    this.fullScreenQuad.beginFill(0x000000)
+    this.fullScreenQuad.lineStyle(10, 0xffff00)
 
     this.fullScreenQuad.drawRect(0, 0, this.guiWidth, this.guiHeight)
 
     this.addChild(this.fullScreenQuad)
-    this.fullScreenQuad.alpha = 0.5
+    this.fullScreenQuad.alpha = 0
     this.fullScreenQuad.parentGroup = this.myParent.game.groups.get('2')
+
+    this.spawnRoom = -1
+    this.doTransition = false
     super.Init()
   }
 
@@ -31,8 +34,6 @@ export default class ObjectGame extends GameObject {
     this.removeChild(this.fullScreenQuad)
   }
   Update (delta) {
-    super.Update(delta)
-
     if (this.myParent.game.input.IsKeyPressed(this.myParent.game.input.vk_d)) {
       console.log('Toggle Debug Mode')
       this.debugMode = !this.debugMode
@@ -45,5 +46,21 @@ export default class ObjectGame extends GameObject {
 
     this.fullScreenQuad.x = -this.myParent.game.app.stage.position.x
     this.fullScreenQuad.y = -this.myParent.game.app.stage.position.y
+
+    if (this.doTransition) {
+      console.log('do transition')
+      if (this.myParent.game.currentRoomKey !== this.spawnRoom) {
+        this.fullScreenQuad.alpha += 0.01
+        if (this.fullScreenQuad.alpha >= 1.0) {
+          this.myParent.game.RoomGoto(this.spawnRoom)
+        }
+      } else {
+        this.fullScreenQuad.alpha -= 0.01
+        if (this.fullScreenQuad <= 0) {
+          this.doTransition = false
+        }
+      }
+    }
+    super.Update(delta)
   }
 }
