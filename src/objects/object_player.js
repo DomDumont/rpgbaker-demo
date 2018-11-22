@@ -74,16 +74,16 @@ export default class ObjectPlayer extends ObjectCollisions {
     this.moveX = 0
     this.moveY = 0
 
-    if (this.myParent.game.input.IsKeyDown(this.myParent.game.input.vk_left)) {
+    if (this.room.game.input.IsKeyDown(this.room.game.input.vk_left)) {
       this.moveX -= this.speed
     }
-    if (this.myParent.game.input.IsKeyDown(this.myParent.game.input.vk_right)) {
+    if (this.room.game.input.IsKeyDown(this.room.game.input.vk_right)) {
       this.moveX += this.speed
     }
-    if (this.myParent.game.input.IsKeyDown(this.myParent.game.input.vk_down)) {
+    if (this.room.game.input.IsKeyDown(this.room.game.input.vk_down)) {
       this.moveY += this.speed
     }
-    if (this.myParent.game.input.IsKeyDown(this.myParent.game.input.vk_up)) {
+    if (this.room.game.input.IsKeyDown(this.room.game.input.vk_up)) {
       this.moveY -= this.speed
     }
 
@@ -140,8 +140,10 @@ export default class ObjectPlayer extends ObjectCollisions {
 
     // Apply movement
 
-    this.x += this.moveX
-    this.y += this.moveY
+    // this.x += this.moveX
+    // this.y += this.moveY
+
+    this.OffsetPosition(this.moveX, this.moveY)
 
     // Update texture animation
 

@@ -37,6 +37,9 @@ export default class RoomGame extends Room {
     })
     tileMap.Init()
     this.addChild(tileMap)
+
+    this.roomWidth = tileMap.width
+    this.roomHeight = tileMap.height
     super.Init()
   }
 

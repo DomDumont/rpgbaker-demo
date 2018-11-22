@@ -36,6 +36,10 @@ export default class RoomInterior extends Room {
     })
     tileMap.Init()
     this.addChild(tileMap)
+
+    this.roomWidth = tileMap.width
+    this.roomHeight = tileMap.height
+
     super.Init()
   }
 

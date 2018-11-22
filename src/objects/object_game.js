@@ -9,8 +9,8 @@ export default class ObjectGame extends GameObject {
     this.persistent = true
     this.debugMode = false
 
-    this.guiWidth = this.myParent.game.app.renderer.width
-    this.guiHeight = this.myParent.game.app.renderer.height
+    this.guiWidth = this.room.game.app.renderer.width
+    this.guiHeight = this.room.game.app.renderer.height
     console.log(this.guiWidth)
     console.log(this.guiHeight)
 
@@ -22,7 +22,7 @@ export default class ObjectGame extends GameObject {
 
     this.addChild(this.fullScreenQuad)
     this.fullScreenQuad.alpha = 0
-    this.fullScreenQuad.parentGroup = this.myParent.game.groups.get('2')
+    this.fullScreenQuad.parentGroup = this.room.game.groups.get('2')
 
     this.spawnRoom = -1
     this.doTransition = false
@@ -34,7 +34,7 @@ export default class ObjectGame extends GameObject {
     this.removeChild(this.fullScreenQuad)
   }
   Update (delta) {
-    if (this.myParent.game.input.IsKeyPressed(this.myParent.game.input.vk_d)) {
+    if (this.room.game.input.IsKeyPressed(this.room.game.input.vk_d)) {
       console.log('Toggle Debug Mode')
       this.debugMode = !this.debugMode
       let newAlpha = this.debugMode
@@ -44,15 +44,15 @@ export default class ObjectGame extends GameObject {
       })
     }
 
-    this.fullScreenQuad.x = -this.myParent.game.app.stage.position.x
-    this.fullScreenQuad.y = -this.myParent.game.app.stage.position.y
+    this.fullScreenQuad.x = -this.room.game.app.stage.position.x
+    this.fullScreenQuad.y = -this.room.game.app.stage.position.y
 
     if (this.doTransition) {
       console.log('do transition')
-      if (this.myParent.game.currentRoomKey !== this.spawnRoom) {
+      if (this.room.game.currentRoomKey !== this.spawnRoom) {
         this.fullScreenQuad.alpha += 0.01
         if (this.fullScreenQuad.alpha >= 1.0) {
-          this.myParent.game.RoomGoto(this.spawnRoom)
+          this.room.game.RoomGoto(this.spawnRoom)
         }
       } else {
         this.fullScreenQuad.alpha -= 0.01
