@@ -137,8 +137,8 @@ export default class ObjectNPC extends ObjectCollisions {
     }
 
     // Apply movement
-    this.x += this.moveX
-    this.y += this.moveY
+
+    this.OffsetPosition(this.moveX, this.moveY)
 
     // Update texture animation
 
