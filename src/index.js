@@ -21,6 +21,8 @@ const maleBody = require('./assets/male-body.png')
 const maleDress = require('./assets/teal_longsleeve.png')
 const maleHair = require('./assets/mohawk.png')
 
+const crops = require('./assets/spr_crops.png')
+
 // localStorage.debug = 'OhYes'
 localStorage.debug = ''
 
@@ -34,6 +36,7 @@ PIXI.loader.add(shadow)
 PIXI.loader.add(maleBody)
 PIXI.loader.add(maleDress)
 PIXI.loader.add(maleHair)
+PIXI.loader.add(crops)
 
 let myGame = new Game(800, 600)
 
