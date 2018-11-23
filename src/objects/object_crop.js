@@ -1,10 +1,11 @@
 import { GameObject } from 'rpgbaker'
+import { Utils } from 'rpgbaker'
 const PIXI = require('pixi.js')
 
 const crops = require('../assets/spr_crops.png')
 export default class ObjectCrop extends GameObject {
-  Init () {
-    super.Init()
+  constructor () {
+    super()
     this.frameWidth = 32
     this.frameHeight = 64
 
@@ -16,6 +17,9 @@ export default class ObjectCrop extends GameObject {
 
     this.fullyGrown = false
     this.sparkle = false
+  }
+  Init () {
+    super.Init()
 
     this.textureCrops = PIXI.loader.resources[crops].texture
 
@@ -30,5 +34,10 @@ export default class ObjectCrop extends GameObject {
     )
 
     this.addChild(this.crops)
+  }
+
+  SetPosition (x, y) {
+    this.x = x - this.width / 2 + 2
+    this.y = y - this.height + 6
   }
 }

@@ -3,6 +3,8 @@ import ObjectPlayer from '../objects/object_player'
 import ObjectNPC from '../objects/object_npc'
 import ObjectTransitions from '../objects/object_transitions'
 import { Room, TileMap } from 'rpgbaker'
+import ObjectCrops from '../objects/object_crops'
+import ObjectCrop from '../objects/object_crop'
 
 const map01 = require('../assets/map01.json')
 
@@ -37,7 +39,7 @@ export default class RoomGame extends Room {
     })
     tileMap.Init()
     tileMap.interactive = true // Test
-    tileMap.on('pointerdown', this.OnClick)
+    tileMap.on('pointerdown', this.OnClick.bind(this))
 
     this.addChild(tileMap)
 
@@ -47,8 +49,21 @@ export default class RoomGame extends Room {
   }
 
   OnClick (event) {
+    let mousePos = new PIXI.Point(event.data.global.x, event.data.global.y)
+    let localMousePos = this.toLocal(mousePos)
+    console.log(
+      'Plant Crop at ' + event.data.global.x + ' ' + event.data.global.y
+    )
     // console.dir(event.data)
-    console.log(event.data.global.x)
+    // mouxe X = event.data.global.x
+    let tempCrop = new ObjectCrop()
+    tempCrop.cropType = 6
+    tempCrop.growthStage = 4 // Test purpose only
+    tempCrop.Init()
+    tempCrop.parentGroup = this.game.groups.get('1')
+    tempCrop.SetPosition(localMousePos.x, localMousePos.y)
+    this.AddGAO(tempCrop)
+    this.addChild(tempCrop)
   }
   Update (delta) {
     // console.log("room game update");
