@@ -36,6 +36,9 @@ export default class RoomGame extends Room {
       }
     })
     tileMap.Init()
+    tileMap.interactive = true // Test
+    tileMap.on('pointerdown', this.OnClick)
+
     this.addChild(tileMap)
 
     this.roomWidth = tileMap.width
@@ -43,6 +46,10 @@ export default class RoomGame extends Room {
     super.Init()
   }
 
+  OnClick (event) {
+    // console.dir(event.data)
+    console.log(event.data.global.x)
+  }
   Update (delta) {
     // console.log("room game update");
     if (this.game.input.IsKeyPressed(27)) {
