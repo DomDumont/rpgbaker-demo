@@ -40,15 +40,34 @@ export default class RoomGame extends Room {
     tileMap.Init()
     tileMap.interactive = true // Test
     tileMap.on('pointerdown', this.OnClick.bind(this))
+    tileMap.on('pointermove', this.OnMouseMove.bind(this))
+    tileMap.on('scroll', this.OnMouseScroll.bind(this))
 
     this.addChild(tileMap)
 
     this.roomWidth = tileMap.width
     this.roomHeight = tileMap.height
+
+    // Crops Manager
+    this.crops = new ObjectCrops('CropsManager', this)
+    this.crops.Init()
+    this.crops.parentGroup = this.game.groups.get('1')
+    this.AddGAO(this.crops)
+    this.addChild(this.crops)
+
     super.Init()
   }
 
+  OnMouseMove (event) {
+    this.crops.OnMouseMove(event)
+  }
+
+  OnMouseScroll (event) {
+    this.crops.OnMouseScroll(event)
+  }
+
   OnClick (event) {
+    if (this.crops.planting === false) return
     let mousePos = new PIXI.Point(event.data.global.x, event.data.global.y)
     let localMousePos = this.toLocal(mousePos)
     console.log(
@@ -56,8 +75,8 @@ export default class RoomGame extends Room {
     )
     // console.dir(event.data)
     // mouxe X = event.data.global.x
-    let tempCrop = new ObjectCrop()
-    tempCrop.cropType = 6
+    let tempCrop = new ObjectCrop('Crop', this)
+    tempCrop.cropType = this.crops.selectCrop
     tempCrop.growthStage = 4 // Test purpose only
     tempCrop.Init()
     tempCrop.parentGroup = this.game.groups.get('1')
