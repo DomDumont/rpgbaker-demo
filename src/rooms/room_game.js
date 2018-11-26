@@ -75,6 +75,14 @@ export default class RoomGame extends Room {
     console.log(
       'Plant Crop at ' + event.data.global.x + ' ' + event.data.global.y
     )
+
+    let snappedX =
+      Math.floor(localMousePos.x / this.crops.cellSize) * this.crops.cellSize
+    let snappedY =
+      Math.floor(localMousePos.y / this.crops.cellSize) * this.crops.cellSize
+
+    snappedX += this.crops.cellSize / 2
+    snappedY += this.crops.cellSize / 2
     // console.dir(event.data)
     // mouxe X = event.data.global.x
     let tempCrop = new ObjectCrop('Crop', this)
@@ -82,7 +90,7 @@ export default class RoomGame extends Room {
     tempCrop.growthStage = 4 // Test purpose only
     tempCrop.Init()
     tempCrop.parentGroup = this.game.groups.get('1')
-    tempCrop.SetPosition(localMousePos.x, localMousePos.y)
+    tempCrop.SetPosition(snappedX, snappedY)
     this.AddGAO(tempCrop)
     this.addChild(tempCrop)
   }

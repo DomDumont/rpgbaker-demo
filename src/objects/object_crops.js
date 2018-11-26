@@ -6,6 +6,7 @@ export default class ObjectCrops extends GameObject {
   Init () {
     super.Init()
 
+    this.cellSize = 32
     // this.tomato = 0
     // this.potato = 1
     // this.carrot = 2
@@ -29,7 +30,13 @@ export default class ObjectCrops extends GameObject {
     this.textureCropsPicked = PIXI.loader.resources[cropsPicked].texture
 
     this.cropsPicked = new PIXI.Sprite(
-      Utils.GetTexturePart(this.textureCropsPicked, 0, 0, 32, 32)
+      Utils.GetTexturePart(
+        this.textureCropsPicked,
+        0,
+        0,
+        this.cellSize,
+        this.cellSize
+      )
     )
 
     this.addChild(this.cropsPicked)
@@ -51,8 +58,11 @@ export default class ObjectCrops extends GameObject {
   OnMouseMove (event) {
     let mousePos = new PIXI.Point(event.data.global.x, event.data.global.y)
     let localMousePos = this.toLocal(mousePos)
-    this.cropsPicked.x = localMousePos.x
-    this.cropsPicked.y = localMousePos.y
+
+    let snappedX = Math.floor(localMousePos.x / this.cellSize) * this.cellSize
+    let snappedY = Math.floor(localMousePos.y / this.cellSize) * this.cellSize
+    this.cropsPicked.x = snappedX
+    this.cropsPicked.y = snappedY
   }
 
   OnMouseScroll (event) {
@@ -64,10 +74,10 @@ export default class ObjectCrops extends GameObject {
 
     this.cropsPicked.texture = Utils.GetTexturePart(
       this.textureCropsPicked,
-      this.selectCrop * 32,
+      this.selectCrop * this.cellSize,
       0,
-      32,
-      32
+      this.cellSize,
+      this.cellSize
     )
   }
 }
