@@ -1,6 +1,6 @@
-import { GameObject } from 'rpgbaker'
-import { Utils } from 'rpgbaker'
+import { GameObject, Utils } from 'rpgbaker'
 
+const PIXI = require('pixi.js')
 const cropsPicked = require('../assets/spr_crops_picked_strip7.png')
 export default class ObjectCrops extends GameObject {
   Init () {
