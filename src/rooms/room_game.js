@@ -6,6 +6,8 @@ import { Room, TileMap } from 'rpgbaker'
 import ObjectCrops from '../objects/object_crops'
 import ObjectCrop from '../objects/object_crop'
 
+const PIXI = require('pixi.js')
+
 const map01 = require('../assets/map01.json')
 
 export default class RoomGame extends Room {

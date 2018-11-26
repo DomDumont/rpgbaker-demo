@@ -1,5 +1,4 @@
-import { GameObject } from 'rpgbaker'
-import { Utils } from 'rpgbaker'
+import { GameObject, Utils } from 'rpgbaker'
 const PIXI = require('pixi.js')
 
 const crops = require('../assets/spr_crops.png')
