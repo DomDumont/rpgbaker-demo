@@ -1,4 +1,5 @@
 import { GameObject, Utils } from 'rpgbaker'
+import ObjectCrop from '../objects/object_crop'
 
 const PIXI = require('pixi.js')
 const cropsPicked = require('../assets/spr_crops_picked_strip7.png')
@@ -42,6 +43,20 @@ export default class ObjectCrops extends GameObject {
     this.addChild(this.cropsPicked)
     this.cropsPicked.alpha = 0
 
+    // Draw plant advisor
+
+    this.plantAdvisor = new PIXI.Graphics()
+    this.plantAdvisor.beginFill(0xffffff)
+    this.plantAdvisor.lineStyle(1, 0xffffff)
+
+    this.plantAdvisor.drawRect(0, 0, this.cellSize, this.cellSize)
+
+    this.room.addChild(this.plantAdvisor)
+    this.plantAdvisor.alpha = 0
+    this.plantAdvisor.parentGroup = this.room.game.groups.get('2')
+
+    this.cropsState = {}
+
     this.selectCrop = 0
   }
 
@@ -52,6 +67,7 @@ export default class ObjectCrops extends GameObject {
       console.log('Toggle Planting Mode')
       this.planting = !this.planting
       this.cropsPicked.alpha = this.planting
+      this.plantAdvisor.alpha = this.planting * 0.25
     }
   }
 
@@ -63,6 +79,27 @@ export default class ObjectCrops extends GameObject {
     let snappedY = Math.floor(localMousePos.y / this.cellSize) * this.cellSize
     this.cropsPicked.x = snappedX
     this.cropsPicked.y = snappedY
+
+    this.plantAdvisor.x = snappedX
+    this.plantAdvisor.y = snappedY
+
+    if (
+      this.room.tileMap.layers['Soil'].GetData(
+        snappedX / this.cellSize,
+        snappedY / this.cellSize
+      )
+    ) {
+      if (
+        this.IsPlanted(snappedX / this.cellSize, snappedY / this.cellSize) ===
+        false
+      ) {
+        this.plantAdvisor.tint = 0x00ff00
+      } else {
+        this.plantAdvisor.tint = 0xff0000
+      }
+    } else {
+      this.plantAdvisor.tint = 0xff0000
+    }
   }
 
   OnMouseScroll (event) {
@@ -79,5 +116,66 @@ export default class ObjectCrops extends GameObject {
       this.cellSize,
       this.cellSize
     )
+  }
+
+  OnMouseClick (event) {
+    if (this.planting === false) {
+      return
+    }
+
+    let mousePos = new PIXI.Point(event.data.global.x, event.data.global.y)
+    let localMousePos = this.toLocal(mousePos)
+    console.log(
+      'Plant Crop at ' + event.data.global.x + ' ' + event.data.global.y
+    )
+
+    let snappedX = Math.floor(localMousePos.x / this.cellSize) * this.cellSize
+    let snappedY = Math.floor(localMousePos.y / this.cellSize) * this.cellSize
+
+    if (
+      this.room.tileMap.layers['Soil'].GetData(
+        snappedX / this.cellSize,
+        snappedY / this.cellSize
+      )
+    ) {
+      console.log('Trop cool')
+      if (
+        this.IsPlanted(snappedX / this.cellSize, snappedY / this.cellSize) ===
+        true
+      ) {
+        console.log('mais occupé')
+        return
+      }
+    } else {
+      return
+    }
+
+    // Let's plant
+
+    this.Plant(snappedX / this.cellSize, snappedY / this.cellSize)
+
+    snappedX += this.cellSize / 2
+    snappedY += this.cellSize / 2
+
+    let tempCrop = new ObjectCrop('Crop', this)
+    tempCrop.cropType = this.selectCrop
+    tempCrop.growthStage = 4 // Test purpose only
+    tempCrop.Init()
+    tempCrop.parentGroup = this.room.game.groups.get('1')
+    tempCrop.SetPosition(snappedX, snappedY)
+    this.room.AddGAO(tempCrop)
+    this.room.addChild(tempCrop)
+  }
+
+  Plant (x, y) {
+    let tempNumber = y * this.room.roomWidth + x
+    this.cropsState[tempNumber] = true
+  }
+
+  IsPlanted (x, y) {
+    let tempNumber = y * this.room.roomWidth + x
+
+    if (this.cropsState[tempNumber] === true) return true
+    else return false
   }
 }

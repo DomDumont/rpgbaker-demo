@@ -4,7 +4,6 @@ import ObjectNPC from '../objects/object_npc'
 import ObjectTransitions from '../objects/object_transitions'
 import { Room, TileMap } from 'rpgbaker'
 import ObjectCrops from '../objects/object_crops'
-import ObjectCrop from '../objects/object_crop'
 
 const PIXI = require('pixi.js')
 
@@ -41,7 +40,7 @@ export default class RoomGame extends Room {
     })
     this.tileMap.Init()
     this.tileMap.interactive = true // Test
-    this.tileMap.on('pointerdown', this.OnClick.bind(this))
+    this.tileMap.on('pointerdown', this.OnMouseClick.bind(this))
     this.tileMap.on('pointermove', this.OnMouseMove.bind(this))
     this.tileMap.on('scroll', this.OnMouseScroll.bind(this))
 
@@ -68,43 +67,8 @@ export default class RoomGame extends Room {
     this.crops.OnMouseScroll(event)
   }
 
-  OnClick (event) {
-    if (this.crops.planting === false) {
-      return
-    }
-
-    let mousePos = new PIXI.Point(event.data.global.x, event.data.global.y)
-    let localMousePos = this.toLocal(mousePos)
-    console.log(
-      'Plant Crop at ' + event.data.global.x + ' ' + event.data.global.y
-    )
-
-    let snappedX =
-      Math.floor(localMousePos.x / this.crops.cellSize) * this.crops.cellSize
-    let snappedY =
-      Math.floor(localMousePos.y / this.crops.cellSize) * this.crops.cellSize
-
-    if (
-      this.tileMap.layers['Soil'].GetData(
-        snappedX / this.crops.cellSize,
-        snappedY / this.crops.cellSize
-      )
-    ) {
-      console.log('Trop cool')
-    }
-
-    snappedX += this.crops.cellSize / 2
-    snappedY += this.crops.cellSize / 2
-    // console.dir(event.data)
-    // mouxe X = event.data.global.x
-    let tempCrop = new ObjectCrop('Crop', this)
-    tempCrop.cropType = this.crops.selectCrop
-    tempCrop.growthStage = 4 // Test purpose only
-    tempCrop.Init()
-    tempCrop.parentGroup = this.game.groups.get('1')
-    tempCrop.SetPosition(snappedX, snappedY)
-    this.AddGAO(tempCrop)
-    this.addChild(tempCrop)
+  OnMouseClick (event) {
+    this.crops.OnMouseClick(event)
   }
   Update (delta) {
     // console.log("room game update");
