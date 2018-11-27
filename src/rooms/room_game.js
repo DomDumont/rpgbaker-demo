@@ -12,7 +12,7 @@ const map01 = require('../assets/map01.json')
 
 export default class RoomGame extends Room {
   Init () {
-    let tileMap = new TileMap(map01, (tilelayer, obj) => {
+    this.tileMap = new TileMap(map01, (tilelayer, obj) => {
       switch (obj.type) {
         case 'TRANSITIONS':
           let newTransition = new ObjectTransitions('transition', this, obj)
@@ -39,16 +39,16 @@ export default class RoomGame extends Room {
           break
       }
     })
-    tileMap.Init()
-    tileMap.interactive = true // Test
-    tileMap.on('pointerdown', this.OnClick.bind(this))
-    tileMap.on('pointermove', this.OnMouseMove.bind(this))
-    tileMap.on('scroll', this.OnMouseScroll.bind(this))
+    this.tileMap.Init()
+    this.tileMap.interactive = true // Test
+    this.tileMap.on('pointerdown', this.OnClick.bind(this))
+    this.tileMap.on('pointermove', this.OnMouseMove.bind(this))
+    this.tileMap.on('scroll', this.OnMouseScroll.bind(this))
 
-    this.addChild(tileMap)
+    this.addChild(this.tileMap)
 
-    this.roomWidth = tileMap.width
-    this.roomHeight = tileMap.height
+    this.roomWidth = this.tileMap.width
+    this.roomHeight = this.tileMap.height
 
     // Crops Manager
     this.crops = new ObjectCrops('CropsManager', this)
@@ -69,7 +69,10 @@ export default class RoomGame extends Room {
   }
 
   OnClick (event) {
-    if (this.crops.planting === false) return
+    if (this.crops.planting === false) {
+      return
+    }
+
     let mousePos = new PIXI.Point(event.data.global.x, event.data.global.y)
     let localMousePos = this.toLocal(mousePos)
     console.log(
@@ -80,6 +83,15 @@ export default class RoomGame extends Room {
       Math.floor(localMousePos.x / this.crops.cellSize) * this.crops.cellSize
     let snappedY =
       Math.floor(localMousePos.y / this.crops.cellSize) * this.crops.cellSize
+
+    if (
+      this.tileMap.layers['Soil'].GetData(
+        snappedX / this.crops.cellSize,
+        snappedY / this.crops.cellSize
+      )
+    ) {
+      console.log('Trop cool')
+    }
 
     snappedX += this.crops.cellSize / 2
     snappedY += this.crops.cellSize / 2
