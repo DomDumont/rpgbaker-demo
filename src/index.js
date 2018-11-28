@@ -23,6 +23,7 @@ const maleHair = require('./assets/mohawk.png')
 
 const crops = require('./assets/spr_crops.png')
 const cropsPicked = require('./assets/spr_crops_picked_strip7.png')
+const sparkles = require('./assets/spr_sparkle_strip5.png')
 
 localStorage.debug = 'OhYes'
 // localStorage.debug = ''
@@ -39,6 +40,7 @@ PIXI.loader.add(maleDress)
 PIXI.loader.add(maleHair)
 PIXI.loader.add(crops)
 PIXI.loader.add(cropsPicked)
+PIXI.loader.add(sparkles)
 
 let myGame = new Game(800, 600)
 

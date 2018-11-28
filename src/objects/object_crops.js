@@ -18,13 +18,13 @@ export default class ObjectCrops extends GameObject {
 
     this.cropsTypes = {}
 
-    this.cropsTypes['tomato'] = { duration: 4, cost: 40 }
-    this.cropsTypes['potato'] = { duration: 3, cost: 35 }
-    this.cropsTypes['carrot'] = { duration: 2, cost: 25 }
-    this.cropsTypes['artichoke'] = { duration: 4, cost: 45 }
-    this.cropsTypes['chilli'] = { duration: 3, cost: 30 }
-    this.cropsTypes['gourd'] = { duration: 2, cost: 20 }
-    this.cropsTypes['corn'] = { duration: 5, cost: 50 }
+    this.cropsTypes[0] = { duration: 4, cost: 40 }
+    this.cropsTypes[1] = { duration: 3, cost: 35 }
+    this.cropsTypes[2] = { duration: 2, cost: 25 }
+    this.cropsTypes[3] = { duration: 4, cost: 45 }
+    this.cropsTypes[4] = { duration: 3, cost: 30 }
+    this.cropsTypes[5] = { duration: 2, cost: 20 }
+    this.cropsTypes[6] = { duration: 5, cost: 50 }
 
     this.planting = false
 
@@ -68,6 +68,13 @@ export default class ObjectCrops extends GameObject {
       this.planting = !this.planting
       this.cropsPicked.alpha = this.planting
       this.plantAdvisor.alpha = this.planting * 0.15
+    }
+
+    if (this.room.game.input.IsKeyPressed(Input.Keycodes.G)) {
+      console.log('Days ++')
+      this.With(ObjectCrop, obj => {
+        obj.AddOneDay()
+      })
     }
   }
 
@@ -159,7 +166,8 @@ export default class ObjectCrops extends GameObject {
 
     let tempCrop = new ObjectCrop('Crop', this)
     tempCrop.cropType = this.selectCrop
-    tempCrop.growthStage = 4 // Test purpose only
+    tempCrop.growthStage = 0 // Test purpose only
+    tempCrop.growthStageDuration = this.cropsTypes[this.selectCrop].duration
     tempCrop.Init()
     tempCrop.parentGroup = this.room.game.groups.get('1')
     tempCrop.SetPosition(snappedX, snappedY)
