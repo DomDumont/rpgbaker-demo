@@ -1,4 +1,4 @@
-import { GameObject } from 'rpgbaker'
+import { GameObject, Input } from 'rpgbaker'
 import ObjectCollisions from './object_collisions'
 const PIXI = require('pixi.js')
 
@@ -38,13 +38,13 @@ export default class ObjectGame extends GameObject {
     this.removeChild(this.grid)
   }
   Update (delta) {
-    if (this.room.game.input.IsKeyPressed(this.room.game.input.vk_d)) {
+    if (this.room.game.input.IsKeyPressed(Input.Keycodes.D)) {
       console.log('Toggle Debug Mode')
       this.debugMode = !this.debugMode
       let newAlpha = this.debugMode
       this.With(ObjectCollisions, obj => {
         console.log(obj.name)
-        obj.graphicsHitArea.alpha = newAlpha
+        obj.graphicsHitArea.alpha = newAlpha * 0.5
       })
 
       this.grid.alpha = newAlpha

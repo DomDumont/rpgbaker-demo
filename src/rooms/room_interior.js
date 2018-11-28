@@ -2,7 +2,7 @@ import ObjectCollisions from '../objects/object_collisions'
 import ObjectPlayer from '../objects/object_player'
 import ObjectNPC from '../objects/object_npc'
 import ObjectTransitions from '../objects/object_transitions'
-import { Room, TileMap } from 'rpgbaker'
+import { Room, TileMap, Input } from 'rpgbaker'
 
 const map02 = require('../assets/map02.json')
 
@@ -45,7 +45,7 @@ export default class RoomInterior extends Room {
 
   Update (delta) {
     // console.log("room game update");
-    if (this.game.input.IsKeyPressed(27)) {
+    if (this.game.input.IsKeyPressed(Input.Keycodes.ESCAPE)) {
       console.log('pause by esc key')
       this.game.RoomGoto('PauseRoom')
     }

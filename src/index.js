@@ -24,8 +24,8 @@ const maleHair = require('./assets/mohawk.png')
 const crops = require('./assets/spr_crops.png')
 const cropsPicked = require('./assets/spr_crops_picked_strip7.png')
 
-// localStorage.debug = 'OhYes'
-localStorage.debug = ''
+localStorage.debug = 'OhYes'
+// localStorage.debug = ''
 
 PIXI.loader.add(femaleBody)
 PIXI.loader.add(femaleDress)

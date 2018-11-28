@@ -1,4 +1,4 @@
-import { GameObject, Utils } from 'rpgbaker'
+import { GameObject, Utils, Input } from 'rpgbaker'
 import ObjectCrop from '../objects/object_crop'
 
 const PIXI = require('pixi.js')
@@ -63,11 +63,11 @@ export default class ObjectCrops extends GameObject {
   Update (delta) {
     super.Update(delta)
 
-    if (this.room.game.input.IsKeyPressed(this.room.game.input.vk_p)) {
+    if (this.room.game.input.IsKeyPressed(Input.Keycodes.P)) {
       console.log('Toggle Planting Mode')
       this.planting = !this.planting
       this.cropsPicked.alpha = this.planting
-      this.plantAdvisor.alpha = this.planting * 0.25
+      this.plantAdvisor.alpha = this.planting * 0.15
     }
   }
 

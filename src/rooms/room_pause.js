@@ -1,4 +1,4 @@
-import { Room } from 'rpgbaker'
+import { Room, Input } from 'rpgbaker'
 import utils from '../utils'
 const PIXI = require('pixi.js')
 
@@ -35,7 +35,7 @@ export default class RoomPause extends Room {
     super.Init()
   }
   Update (delta) {
-    if (this.game.input.IsKeyPressed(27)) {
+    if (this.game.input.IsKeyPressed(Input.Keycodes.ESCAPE)) {
       console.log('resume by esc key')
       this.game.RoomGoto('GameRoom')
     }

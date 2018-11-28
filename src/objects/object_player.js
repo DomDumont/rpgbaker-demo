@@ -1,7 +1,7 @@
 import ObjectCollisions from './object_collisions'
 import ObjectGame from './object_game'
 import ObjectTransitions from './object_transitions'
-import { Utils } from 'rpgbaker'
+import { Utils, Input } from 'rpgbaker'
 
 const PIXI = require('pixi.js')
 const femaleBody = require('../assets/female-body.png')
@@ -74,16 +74,16 @@ export default class ObjectPlayer extends ObjectCollisions {
     this.moveX = 0
     this.moveY = 0
 
-    if (this.room.game.input.IsKeyDown(this.room.game.input.vk_left)) {
+    if (this.room.game.input.IsKeyDown(Input.Keycodes.LEFT)) {
       this.moveX -= this.speed
     }
-    if (this.room.game.input.IsKeyDown(this.room.game.input.vk_right)) {
+    if (this.room.game.input.IsKeyDown(Input.Keycodes.RIGHT)) {
       this.moveX += this.speed
     }
-    if (this.room.game.input.IsKeyDown(this.room.game.input.vk_down)) {
+    if (this.room.game.input.IsKeyDown(Input.Keycodes.DOWN)) {
       this.moveY += this.speed
     }
-    if (this.room.game.input.IsKeyDown(this.room.game.input.vk_up)) {
+    if (this.room.game.input.IsKeyDown(Input.Keycodes.UP)) {
       this.moveY -= this.speed
     }
 
