@@ -56,6 +56,7 @@ export default class ObjectCrops extends GameObject {
     this.plantAdvisor.parentGroup = this.room.game.groups.get('2')
 
     this.cropsState = {}
+    this.cropsData = []
 
     this.selectCrop = 0
   }
@@ -185,5 +186,15 @@ export default class ObjectCrops extends GameObject {
 
     if (this.cropsState[tempNumber] === true) return true
     else return false
+  }
+
+  OnRoomEnd () {
+    super.OnRoomEnd()
+    if (this.room.game.currentRoomKey === 'GameRoom') {
+      console.log('Save crops data ...')
+      this.With(ObjectCrop, obj => {
+        this.cropsData.push({ x: obj.x })
+      })
+    }
   }
 }

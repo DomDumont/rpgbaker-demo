@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2018.03.21" orientation="orthogonal" renderorder="right-down" width="24" height="15" tilewidth="32" tileheight="32" infinite="0" nextobjectid="55">
+<map version="1.0" tiledversion="2018.03.21" orientation="orthogonal" renderorder="right-down" width="24" height="15" tilewidth="32" tileheight="32" infinite="0" nextobjectid="60">
  <tileset firstgid="1" name="spr_tile_interior" tilewidth="32" tileheight="32" tilecount="1024" columns="32">
   <image source="spr_tile_interior.png" width="1024" height="1024"/>
  </tileset>
@@ -76,7 +76,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,390,390,390,0,0,0,0
 </data>
  </layer>
  <layer name="L1_Objects" width="24" height="15">
@@ -178,4 +178,13 @@
 </data>
  </layer>
  <objectgroup color="#ff0000" name="Collisions"/>
+ <objectgroup color="#00ff00" name="Transitions">
+  <object id="59" type="TRANSITIONS" x="544" y="448" width="96" height="32">
+   <properties>
+    <property name="TargetRoom" value="GameRoom"/>
+    <property name="TargetX" type="int" value="0"/>
+    <property name="TargetY" type="int" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

@@ -62,7 +62,7 @@ export default class ObjectGame extends GameObject {
         }
       } else {
         this.fullScreenQuad.alpha -= 0.01
-        if (this.fullScreenQuad <= 0) {
+        if (this.fullScreenQuad.alpha <= 0) {
           this.doTransition = false
         }
       }
