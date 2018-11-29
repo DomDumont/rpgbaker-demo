@@ -195,6 +195,20 @@ export default class ObjectCrops extends GameObject {
       let gameObject = this.room.GetGAOByName('game')
       if (gameObject.cropsData.length > 0) {
         console.log('COOOLLL !!!')
+        for (let i = 0; i < gameObject.cropsData.length; i++) {
+          let tempCrop = new ObjectCrop('Crop', this)
+          tempCrop.cropType = gameObject.cropsData[i].cropType
+          tempCrop.growthStage = gameObject.cropsData[i].growthStage
+          tempCrop.growthStageDuration =
+            gameObject.cropsData[i].growthStageDuration
+          tempCrop.Init()
+          tempCrop.parentGroup = this.room.game.groups.get('1')
+          tempCrop.x = gameObject.cropsData[i].x
+          tempCrop.y = gameObject.cropsData[i].y
+
+          this.room.AddGAO(tempCrop)
+          this.room.addChild(tempCrop)
+        }
       }
     }
   }
