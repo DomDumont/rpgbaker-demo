@@ -4,6 +4,8 @@ const PIXI = require('pixi.js')
 
 export default class ObjectGame extends GameObject {
   Init () {
+    super.Init()
+
     console.log('ObjectGame Init')
 
     this.persistent = true
@@ -29,7 +31,7 @@ export default class ObjectGame extends GameObject {
 
     this.cellSize = 32
 
-    super.Init()
+    this.cropsData = []
   }
 
   Destroy () {
@@ -54,7 +56,6 @@ export default class ObjectGame extends GameObject {
     this.fullScreenQuad.y = -this.room.game.app.stage.position.y
 
     if (this.doTransition) {
-      console.log('do transition')
       if (this.room.game.currentRoomKey !== this.spawnRoom) {
         this.fullScreenQuad.alpha += 0.01
         if (this.fullScreenQuad.alpha >= 1.0) {

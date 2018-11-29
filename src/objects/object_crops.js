@@ -56,7 +56,6 @@ export default class ObjectCrops extends GameObject {
     this.plantAdvisor.parentGroup = this.room.game.groups.get('2')
 
     this.cropsState = {}
-    this.cropsData = []
 
     this.selectCrop = 0
   }
@@ -188,12 +187,24 @@ export default class ObjectCrops extends GameObject {
     else return false
   }
 
+  OnRoomStart () {
+    super.OnRoomStart()
+    if (this.room.game.currentRoomKey === 'GameRoom') {
+      console.log('Load crops data ...')
+
+      let gameObject = this.room.GetGAOByName('game')
+      if (gameObject.cropsData.length > 0) {
+        console.log('COOOLLL !!!')
+      }
+    }
+  }
   OnRoomEnd () {
     super.OnRoomEnd()
     if (this.room.game.currentRoomKey === 'GameRoom') {
       console.log('Save crops data ...')
+      let gameObject = this.room.GetGAOByName('game')
       this.With(ObjectCrop, obj => {
-        this.cropsData.push({ x: obj.x })
+        gameObject.cropsData.push(obj)
       })
     }
   }
