@@ -22,9 +22,8 @@ export default class ObjectGame extends GameObject {
 
     this.fullScreenQuad.drawRect(0, 0, this.guiWidth, this.guiHeight)
 
-    this.addChild(this.fullScreenQuad)
+    this.room.game.UI.addChild(this.fullScreenQuad)
     this.fullScreenQuad.alpha = 0
-    this.fullScreenQuad.parentGroup = this.room.game.groups.get('2')
 
     this.spawnRoom = -1
     this.doTransition = false
@@ -36,8 +35,8 @@ export default class ObjectGame extends GameObject {
 
   Destroy () {
     console.log('ObjectGame Destroy')
-    this.removeChild(this.fullScreenQuad)
-    this.removeChild(this.grid)
+    this.room.game.UI.removeChild(this.fullScreenQuad)
+    this.room.game.UI.removeChild(this.grid)
   }
   Update (delta) {
     if (this.room.game.input.IsKeyPressed(Input.Keycodes.D)) {
@@ -80,7 +79,7 @@ export default class ObjectGame extends GameObject {
     console.log('GetCurrentRoom ' + this.roomWidth + ' ' + this.roomHeight)
 
     if (this.grid) {
-      this.removeChild(this.grid)
+      this.room.game.UI.removeChild(this.grid)
     }
 
     this.grid = new PIXI.Graphics()
@@ -99,8 +98,6 @@ export default class ObjectGame extends GameObject {
     }
 
     this.grid.alpha = 0
-    this.addChild(this.grid)
-
-    this.grid.parentGroup = this.room.game.groups.get('2')
+    this.room.game.UI.addChild(this.grid)
   }
 }

@@ -16,25 +16,25 @@ export default class RoomGame extends Room {
         case 'TRANSITIONS':
           let newTransition = new ObjectTransitions('transition', this, obj)
           this.AddGAO(newTransition)
-          this.addChild(newTransition)
+          tilelayer.addChild(newTransition)
           break
         case 'COLLISIONS':
           let newCollision = new ObjectCollisions('collision', this, obj)
           this.AddGAO(newCollision)
-          this.addChild(newCollision)
+          tilelayer.addChild(newCollision)
           break
         case 'PLAYER':
           let tempPlayer = new ObjectPlayer('player', this, obj)
           this.AddGAO(tempPlayer)
-          this.addChild(tempPlayer)
-          tempPlayer.parentGroup = this.game.groups.get('1')
+          tilelayer.addChild(tempPlayer)
+
           this.game.camera.Follow(tempPlayer)
           break
         case 'NPC':
           let tempNPC = new ObjectNPC('npc', this, obj)
-          tempNPC.parentGroup = this.game.groups.get('1')
+
           this.AddGAO(tempNPC)
-          this.addChild(tempNPC)
+          tilelayer.addChild(tempNPC)
           break
       }
     })
@@ -52,7 +52,6 @@ export default class RoomGame extends Room {
     // Crops Manager
     this.crops = new ObjectCrops('CropsManager', this)
     this.crops.Init()
-    this.crops.parentGroup = this.game.groups.get('1')
     this.AddGAO(this.crops)
     this.addChild(this.crops)
 
@@ -71,12 +70,14 @@ export default class RoomGame extends Room {
     this.crops.OnMouseClick(event)
   }
   Update (delta) {
+    super.Update(delta)
+
+    this.tileMap.Update(delta)
     // console.log("room game update");
     if (this.game.input.IsKeyPressed(Input.Keycodes.ESCAPE)) {
       console.log('pause by esc key')
       this.game.RoomGoto('PauseRoom')
     }
-    super.Update(delta)
   }
 
   Destroy () {

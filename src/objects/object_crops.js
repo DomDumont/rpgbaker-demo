@@ -53,8 +53,6 @@ export default class ObjectCrops extends GameObject {
 
     this.room.addChild(this.plantAdvisor)
     this.plantAdvisor.alpha = 0
-    this.plantAdvisor.parentGroup = this.room.game.groups.get('2')
-
     this.cropsState = {}
 
     this.selectCrop = 0
@@ -169,7 +167,6 @@ export default class ObjectCrops extends GameObject {
     tempCrop.growthStage = 0 // Test purpose only
     tempCrop.growthStageDuration = this.cropsTypes[this.selectCrop].duration
     tempCrop.Init()
-    tempCrop.parentGroup = this.room.game.groups.get('1')
     tempCrop.SetPosition(snappedX, snappedY)
     this.room.AddGAO(tempCrop)
     this.room.addChild(tempCrop)
@@ -202,7 +199,6 @@ export default class ObjectCrops extends GameObject {
           tempCrop.growthStageDuration =
             gameObject.cropsData[i].growthStageDuration
           tempCrop.Init()
-          tempCrop.parentGroup = this.room.game.groups.get('1')
           tempCrop.x = gameObject.cropsData[i].x
           tempCrop.y = gameObject.cropsData[i].y
 

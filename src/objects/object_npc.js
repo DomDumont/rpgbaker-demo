@@ -32,7 +32,7 @@ export default class ObjectNPC extends ObjectCollisions {
         64
       )
     )
-    // this.femaleBody.parentGroup = this.parent.game.groups.get('1')
+
     this.addChild(this.femaleBody)
 
     this.femaleDress = new PIXI.Sprite(
@@ -44,7 +44,7 @@ export default class ObjectNPC extends ObjectCollisions {
         64
       )
     )
-    // this.femaleDress.parentGroup = this.parent.game.groups.get('1')
+
     this.addChild(this.femaleDress)
 
     this.femaleHair = new PIXI.Sprite(
@@ -56,7 +56,7 @@ export default class ObjectNPC extends ObjectCollisions {
         64
       )
     )
-    // this.femaleHair.parentGroup = this.parent.game.groups.get('1')
+
     this.addChild(this.femaleHair)
 
     this.SetHitArea(new PIXI.Rectangle(17, 54, 30, 10))
