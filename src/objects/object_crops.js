@@ -76,6 +76,19 @@ export default class ObjectCrops extends GameObject {
     }
   }
 
+  AddOneDay () {
+    if (this.room.game.currentRoomKey === 'GameRoom') {
+      console.log('Days ++')
+      this.With(ObjectCrop, obj => {
+        obj.AddOneDay()
+      })
+    } else {
+      let gameObject = this.room.GetGAOByName('game')
+      for (let i = 0; i < gameObject.cropsData.length; i++) {
+        gameObject.cropsData[i].AddOneDay()
+      }
+    }
+  }
   OnMouseMove (event) {
     let mousePos = new PIXI.Point(event.data.global.x, event.data.global.y)
     let localMousePos = this.toLocal(mousePos)
