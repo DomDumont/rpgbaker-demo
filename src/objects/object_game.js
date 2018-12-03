@@ -51,9 +51,6 @@ export default class ObjectGame extends GameObject {
       this.grid.alpha = newAlpha
     }
 
-    this.fullScreenQuad.x = -this.room.game.app.stage.position.x
-    this.fullScreenQuad.y = -this.room.game.app.stage.position.y
-
     if (this.doTransition) {
       if (this.room.game.currentRoomKey !== this.spawnRoom) {
         this.fullScreenQuad.alpha += 0.01

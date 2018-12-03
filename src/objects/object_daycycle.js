@@ -20,7 +20,7 @@ export default class ObjectDayCycle extends GameObject {
     this.season = 1
     this.year = 1
 
-    this.nbGameSecondsPerTick = 5000
+    this.nbGameSecondsPerTick = 500
 
     this.darkness = 0
 
@@ -44,8 +44,21 @@ export default class ObjectDayCycle extends GameObject {
     this.basicText.y = 30
 
     this.room.game.UI.addChild(this.basicText)
+
+    this.drawDayLight = false
   }
 
+  OnRoomStart () {
+    super.OnRoomStart()
+    switch (this.room.game.currentRoomKey) {
+      case 'GameRoom':
+        this.drawDayLight = true
+        break
+
+      default:
+        this.drawDayLight = false
+    }
+  }
   Update (delta) {
     super.Update(delta)
 
@@ -55,7 +68,11 @@ export default class ObjectDayCycle extends GameObject {
 
     this.darkness = this.hours / 24
 
-    // this.fullScreenQuad.alpha = this.darkness
+    if (this.drawDayLight) {
+      this.fullScreenQuad.alpha = this.darkness
+    } else {
+      this.fullScreenQuad.alpha = 0
+    }
 
     if (this.hours >= 24) {
       this.seconds = 0
@@ -75,14 +92,9 @@ export default class ObjectDayCycle extends GameObject {
       }
     }
 
-    this.fullScreenQuad.x = -this.room.game.app.stage.position.x
-    this.fullScreenQuad.y = -this.room.game.app.stage.position.y
-
     this.basicText.setText(
       '\n Day ' + this.day + '\n Season ' + this.season + '\n Year ' + this.year
     )
-    this.basicText.x = -this.room.game.app.stage.position.x + 30
-    this.basicText.y = -this.room.game.app.stage.position.y + 30
   }
 
   Destroy () {
