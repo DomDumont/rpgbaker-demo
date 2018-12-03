@@ -20,7 +20,7 @@ export default class ObjectDayCycle extends GameObject {
     this.season = 1
     this.year = 1
 
-    this.nbGameSecondsPerTick = 100
+    this.nbGameSecondsPerTick = 5000
 
     this.darkness = 0
 
@@ -41,7 +41,7 @@ export default class ObjectDayCycle extends GameObject {
     this.basicText = new PIXI.Text('Basic text in pixi')
     this.basicText.style.fill = 0xffff00
     this.basicText.x = 30
-    this.basicText.y = 90
+    this.basicText.y = 30
 
     this.room.game.UI.addChild(this.basicText)
   }
@@ -55,7 +55,7 @@ export default class ObjectDayCycle extends GameObject {
 
     this.darkness = this.hours / 24
 
-    this.fullScreenQuad.alpha = this.darkness
+    // this.fullScreenQuad.alpha = this.darkness
 
     if (this.hours >= 24) {
       this.seconds = 0
@@ -78,9 +78,11 @@ export default class ObjectDayCycle extends GameObject {
     this.fullScreenQuad.x = -this.room.game.app.stage.position.x
     this.fullScreenQuad.y = -this.room.game.app.stage.position.y
 
-    this.basicText.setText(this.day)
+    this.basicText.setText(
+      '\n Day ' + this.day + '\n Season ' + this.season + '\n Year ' + this.year
+    )
     this.basicText.x = -this.room.game.app.stage.position.x + 30
-    this.basicText.y = -this.room.game.app.stage.position.y + 90
+    this.basicText.y = -this.room.game.app.stage.position.y + 30
   }
 
   Destroy () {

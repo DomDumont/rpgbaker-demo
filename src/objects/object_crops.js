@@ -207,10 +207,7 @@ export default class ObjectCrops extends GameObject {
         console.log('COOOLLL !!!')
         for (let i = 0; i < gameObject.cropsData.length; i++) {
           let tempCrop = new ObjectCrop('Crop', this)
-          tempCrop.cropType = gameObject.cropsData[i].cropType
-          tempCrop.growthStage = gameObject.cropsData[i].growthStage
-          tempCrop.growthStageDuration =
-            gameObject.cropsData[i].growthStageDuration
+          tempCrop = gameObject.cropsData[i]
           tempCrop.Init()
           tempCrop.x = gameObject.cropsData[i].x
           tempCrop.y = gameObject.cropsData[i].y
@@ -225,7 +222,9 @@ export default class ObjectCrops extends GameObject {
     super.OnRoomEnd()
     if (this.room.game.currentRoomKey === 'GameRoom') {
       console.log('Save crops data ...')
+
       let gameObject = this.room.GetGAOByName('game')
+      gameObject.cropsData = []
       this.With(ObjectCrop, obj => {
         gameObject.cropsData.push(obj)
       })
