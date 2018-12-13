@@ -2,12 +2,14 @@
   "name": "rpgbaker-demo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "electron.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack --mode development",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "electron": "webpack --mode production --target electron-renderer && electron .",
+    "dist": "webpack --mode production --target electron-renderer &&  electron-packager .  TimejsDemo --overwrite --platform=win32 --arch=x64 --icon=icon.ico --prune=true --asar --out=build"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +17,8 @@
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
+    "electron": "^3.0.11",
+    "electron-packager": "^13.0.1",
     "eslint": "^5.8.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.14.0",
@@ -34,6 +38,6 @@
   },
   "dependencies": {
     "pixi.js": "^4.8.2",
-    "rpgbaker": "^1.0.3"
+    "rpgbaker": "^1.4.4"
   }
 }
